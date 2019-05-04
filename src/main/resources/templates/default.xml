@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <modelVersion/>
+    <parent>
+        <groupId/>
+        <artifactId/>
+        <version/>
+    </parent>
+    <groupId/>
+    <artifactId/>
+    <version/>
+    <packaging/>
+    <name/>
+
+    <modules/>
+
+    <properties type="map"/>
+
+    <dependencies sort="comment,scope,groupId,artifactId">
+        <dependency>
+            <groupId required="true"/>
+            <artifactId required="true"/>
+        </dependency>
+    </dependencies>
+
+    <profiles/>
+
+    <dependencyManagement/>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId required="true"/>
+                <artifactId required="true"/>
+                <version/>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

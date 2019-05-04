@@ -13,6 +13,7 @@
     </properties>
 
     <dependencies>
+        <!--sample comment-->
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
@@ -23,6 +24,11 @@
             <artifactId>maven-plugin-annotations</artifactId>
             <version>3.6.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>2.1.1</version>
         </dependency>
     </dependencies>
 
