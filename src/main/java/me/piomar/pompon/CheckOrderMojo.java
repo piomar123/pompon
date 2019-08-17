@@ -23,7 +23,7 @@ public class CheckOrderMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException {
         try {
             PomParser parser = new PomParser();
-            PomElement root = parser.parse(pomFile);
+            PomXmlElement root = parser.parse(pomFile);
             getLog().info(root.toString());
 
         } catch (Exception e) {

@@ -15,7 +15,7 @@ class PomParserTest {
         PomParser parser = new PomParser();
 
         // when
-        PomElement pom = parser.parse(inputPomStream);
+        PomXmlElement pom = parser.parse(inputPomStream);
 
         // then
         then(pom).toString();

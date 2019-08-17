@@ -3,12 +3,12 @@ package me.piomar.pompon;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PomElement extends PomNode {
+public class PomXmlElement extends PomXmlNode {
 
     private final String name;
-    final List<PomNode> children = new ArrayList<>();
+    final List<PomXmlNode> children = new ArrayList<>();
 
-    public PomElement(String name) {
+    public PomXmlElement(String name) {
         this.name = name;
     }
 
@@ -19,5 +19,10 @@ public class PomElement extends PomNode {
     @Override
     public String toString() {
         return String.format("<%s>", name);
+    }
+
+    @Override
+    public PomXmlNodeType type() {
+        return PomXmlNodeType.XmlElement;
     }
 }

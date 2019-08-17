@@ -20,7 +20,7 @@ public class PomParser {
     public PomParser() {
     }
 
-    public PomElement parse(InputStream inputStream) {
+    public PomXmlElement parse(InputStream inputStream) {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -31,13 +31,13 @@ public class PomParser {
             InputSource source = new InputSource(reader);
             source.setEncoding(StandardCharsets.UTF_8.name());
             saxParser.parse(source, pomHandler);
-            return pomHandler.finish();
+            return pomHandler.getRoot();
         } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new IllegalStateException("Unable to parse input", e);
         }
     }
 
-    public PomElement parse(File pomFile) throws IOException {
+    public PomXmlElement parse(File pomFile) throws IOException {
         try (InputStream inputStream = new FileInputStream(pomFile)) {
             return parse(inputStream);
         }

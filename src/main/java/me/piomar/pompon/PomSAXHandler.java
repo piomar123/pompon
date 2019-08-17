@@ -11,8 +11,8 @@ import org.xml.sax.helpers.DefaultHandler;
 
 class PomSAXHandler extends DefaultHandler implements LexicalHandler {
 
-    private final Deque<PomElement> elementsStack = new ArrayDeque<>();
-    private PomElement currentElement;
+    private final Deque<PomXmlElement> elementsStack = new ArrayDeque<>();
+    private PomXmlElement currentElement;
     private Locator locator;
 
     public PomSAXHandler() {
@@ -25,7 +25,7 @@ class PomSAXHandler extends DefaultHandler implements LexicalHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        currentElement = new PomElement(qName);
+        currentElement = new PomXmlElement(qName);
         if (!elementsStack.isEmpty()) {
             elementsStack.getLast().children.add(currentElement);
         }
@@ -50,7 +50,7 @@ class PomSAXHandler extends DefaultHandler implements LexicalHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         String text = String.valueOf(ch, start, length);
-        PomTextNode node = new PomTextNode(text);
+        PomXmlTextNode node = new PomXmlTextNode(text);
         currentElement.children.add(node);
     }
 
@@ -62,7 +62,7 @@ class PomSAXHandler extends DefaultHandler implements LexicalHandler {
     @Override
     public void comment(char[] ch, int start, int length) throws SAXException {
         String commentText = String.valueOf(ch, start, length);
-        currentElement.children.add(new PomComment(commentText));
+        currentElement.children.add(new PomXmlComment(commentText));
     }
 
     @Override
@@ -96,7 +96,7 @@ class PomSAXHandler extends DefaultHandler implements LexicalHandler {
         }
     }
 
-    public PomElement finish() {
+    public PomXmlElement getRoot() {
         return this.currentElement;
     }
 }
