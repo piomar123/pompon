@@ -8,7 +8,8 @@ public class PomXmlElement extends PomXmlNode {
     private final String name;
     final List<PomXmlNode> children = new ArrayList<>();
 
-    public PomXmlElement(String name) {
+    public PomXmlElement(String name, PomXmlLocation location) {
+        super(location);
         this.name = name;
     }
 

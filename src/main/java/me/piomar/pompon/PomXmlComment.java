@@ -4,7 +4,8 @@ public class PomXmlComment extends PomXmlNode {
 
     private final String commentText;
 
-    public PomXmlComment(String commentText) {
+    public PomXmlComment(String commentText, PomXmlLocation location) {
+        super(location);
         this.commentText = commentText;
     }
 

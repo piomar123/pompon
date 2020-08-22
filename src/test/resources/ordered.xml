@@ -3,14 +3,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.piomar.test</groupId>
-    <artifactId>pompon-maven-plugin</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <artifactId>test-artifact</artifactId>
+    <version>This is a test</version>
     <packaging>maven-plugin</packaging>
     <name>Lorem ipsum dolor sit amet</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- maven dependencies -->
+        <empty></empty>
+        <maven-plug.version>3.6.1</maven-plug.version>
+        <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
+        <maven-plugin-api.version>3.6.1</maven-plugin-api.version>
+        <something-nested>
+            <inner>foo</inner>
+        </something-nested>
+
+        <!-- test dependencies -->
         <junit-jupiter.version>5.5.1</junit-jupiter.version>
+
+        <!-- other -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -18,12 +31,12 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.6.1</version>
+            <version>${maven-plugin-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.6.0</version>
+            <version>${maven-plugin-annotations.version}</version>
             <scope>provided</scope>
         </dependency>
 

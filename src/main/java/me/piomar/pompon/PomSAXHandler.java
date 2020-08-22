@@ -1,5 +1,7 @@
 package me.piomar.pompon;
 
+import static me.piomar.pompon.PomXmlLocation.createLocation;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -25,7 +27,7 @@ class PomSAXHandler extends DefaultHandler implements LexicalHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        currentElement = new PomXmlElement(qName);
+        currentElement = new PomXmlElement(qName, createLocation(locator));
         if (!elementsStack.isEmpty()) {
             elementsStack.getLast().children.add(currentElement);
         }
@@ -50,7 +52,7 @@ class PomSAXHandler extends DefaultHandler implements LexicalHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         String text = String.valueOf(ch, start, length);
-        PomXmlTextNode node = new PomXmlTextNode(text);
+        PomXmlTextNode node = new PomXmlTextNode(text, createLocation(locator));
         currentElement.children.add(node);
     }
 
@@ -62,7 +64,7 @@ class PomSAXHandler extends DefaultHandler implements LexicalHandler {
     @Override
     public void comment(char[] ch, int start, int length) throws SAXException {
         String commentText = String.valueOf(ch, start, length);
-        currentElement.children.add(new PomXmlComment(commentText));
+        currentElement.children.add(new PomXmlComment(commentText, createLocation(locator)));
     }
 
     @Override

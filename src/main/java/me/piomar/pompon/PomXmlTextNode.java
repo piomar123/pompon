@@ -4,8 +4,13 @@ public class PomXmlTextNode extends PomXmlNode {
 
     private final String text;
 
-    public PomXmlTextNode(String text) {
+    public PomXmlTextNode(String text, PomXmlLocation location) {
+        super(location);
         this.text = text;
+    }
+
+    public String text() {
+        return text;
     }
 
     @Override
