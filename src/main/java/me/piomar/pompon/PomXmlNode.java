@@ -1,5 +1,8 @@
 package me.piomar.pompon;
 
+/**
+ * Abstraction over various XML item types like element, comment or text entry. See subclasses.
+ */
 public abstract class PomXmlNode {
 
     private final PomXmlLocation location;

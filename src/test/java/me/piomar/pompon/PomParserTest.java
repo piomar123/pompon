@@ -3,7 +3,7 @@ package me.piomar.pompon;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import java.io.InputStream;
-import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -18,24 +18,18 @@ class PomParserTest {
 
         // when
         PomXmlElement xml = parser.parse(inputPomStream);
-        PomXmlElement xmlProperties = findPropertiesElement(xml.children);
+        Map<String, PomXmlElement> elementByName = PomXmlUtils.childrenMap(xml);
+        PomXmlElement xmlProperties = elementByName.get("properties");
         PomProperties pomProperties = PomProperties.create(xmlProperties);
         Optional<String> unordered = pomProperties.isUnordered();
+        PomDependencies.create(elementByName.get("dependencies")).isUnordered();
+
+        xml.getChildByName("dependencyManagement")
+           .flatMap(e -> e.getChildByName("dependencies"))
+           .ifPresent(deps -> PomDependencies.create(deps).isUnordered());
 
         // then
         then(xml).toString();
-    }
-
-    private PomXmlElement findPropertiesElement(Collection<PomXmlNode> elements) {
-        for (PomXmlNode node : elements) {
-            if (node.type() == PomXmlNodeType.XmlElement) {
-                PomXmlElement element = (PomXmlElement) node;
-                if (element.name().equals("properties")) {
-                    return element;
-                }
-            }
-        }
-        return null;
     }
 
 }

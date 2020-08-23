@@ -7,7 +7,7 @@ import org.immutables.value.Value;
 import com.google.common.collect.ImmutableMap;
 
 @Value.Immutable
-public abstract class PomSection<T> {
+public abstract class PomDependenciesSection {
 
     @Nullable
     public abstract String name();
@@ -15,5 +15,5 @@ public abstract class PomSection<T> {
     @Nullable
     public abstract PomXmlComment commentNode();
 
-    public abstract ImmutableMap<T, PomXmlElement> entries();
+    public abstract ImmutableMap<PomDependency, PomXmlElement> dependencies();
 }
