@@ -9,8 +9,10 @@ import com.google.common.collect.ImmutableMap;
 @Value.Immutable
 public abstract class PomSection<T> {
 
-    @Nullable
-    public abstract String name();
+    @Value.Default
+    public String name() {
+        return "(default)";
+    }
 
     @Nullable
     public abstract PomXmlComment commentNode();

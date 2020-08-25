@@ -10,6 +10,7 @@
 
     <properties>
         <assertj.version>3.12.2</assertj.version>
+        <dom4j.version>2.1.1</dom4j.version>
         <guava.version>27.1-jre</guava.version>
         <immutables.version>2.7.5</immutables.version>
         <junit-jupiter.version>5.5.1</junit-jupiter.version>
@@ -39,7 +40,7 @@
         <dependency>
             <groupId>org.dom4j</groupId>
             <artifactId>dom4j</artifactId>
-            <version>2.1.1</version>
+            <version>${dom4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.immutables</groupId>
@@ -49,7 +50,6 @@
         </dependency>
 
         <!--test dependencies-->
-
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -63,10 +63,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>17.0.0</version>
-            <scope>compile</scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -85,6 +85,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>3.6.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
             </plugin>
         </plugins>
     </build>

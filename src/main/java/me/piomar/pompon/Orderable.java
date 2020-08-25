@@ -1,13 +1,13 @@
 package me.piomar.pompon;
 
-import java.util.Optional;
+import java.util.List;
 
 /**
  * Interface implemented by POM elements that can be ordered.
  */
 public interface Orderable {
 
-    Optional<String> isUnordered();
+    List<String> getOrderViolations();
 
     // void makeOrder();
 

@@ -1,9 +1,9 @@
 package me.piomar.pompon;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -26,7 +26,8 @@ public class PomProperties implements Orderable {
     }
 
     @Override
-    public Optional<String> isUnordered() {
+    public List<String> getOrderViolations() {
+        List<String> violations = new ArrayList<>();
         for (PomSection<String> section : sections) {
             ImmutableSet<Entry<String, PomXmlElement>> actualOrder = section.entries().entrySet();
             SortedSet<Entry<String, PomXmlElement>> expectedOrder = new TreeSet<>(Entry.comparingByKey());
@@ -40,18 +41,13 @@ public class PomProperties implements Orderable {
                 if (expected.getKey().equals(actual.getKey())) {
                     continue;
                 }
-                throw new IllegalStateException(String.format("Unordered section <!--%s-->: expected <%s> in place of <%s>, %s",
-                                                              section.name(),
-                                                              expected.getKey(),
-                                                              actual.getKey(),
-                                                              actual.getValue().sourceLocation()));
+                violations.add(String.format("Unordered section <!--%s-->: expected <%s> in place of <%s>, %s",
+                                             section.name(),
+                                             expected.getKey(),
+                                             actual.getKey(),
+                                             actual.getValue().sourceLocation()));
             }
         }
-        return Optional.empty();
+        return violations;
     }
-
-    // @Override
-    // public void makeOrder() {
-    //     throw new UnsupportedOperationException("nope");
-    // }
 }

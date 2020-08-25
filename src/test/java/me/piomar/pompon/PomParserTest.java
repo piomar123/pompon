@@ -3,8 +3,7 @@ package me.piomar.pompon;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import java.io.InputStream;
-import java.util.Map;
-import java.util.Optional;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,18 +17,11 @@ class PomParserTest {
 
         // when
         PomXmlElement xml = parser.parse(inputPomStream);
-        Map<String, PomXmlElement> elementByName = PomXmlUtils.childrenMap(xml);
-        PomXmlElement xmlProperties = elementByName.get("properties");
-        PomProperties pomProperties = PomProperties.create(xmlProperties);
-        Optional<String> unordered = pomProperties.isUnordered();
-        PomDependencies.create(elementByName.get("dependencies")).isUnordered();
-
-        xml.getChildByName("dependencyManagement")
-           .flatMap(e -> e.getChildByName("dependencies"))
-           .ifPresent(deps -> PomDependencies.create(deps).isUnordered());
+        PomStructure pom = PomStructure.parse(xml);
+        List<String> disorders = pom.getOrderViolations();
 
         // then
-        then(xml).toString();
+        then(disorders).isEmpty();
     }
 
 }
