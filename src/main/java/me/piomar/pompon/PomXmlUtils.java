@@ -3,22 +3,12 @@ package me.piomar.pompon;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
-
-import com.google.common.collect.ImmutableMap;
 
 public class PomXmlUtils {
 
     private PomXmlUtils() {
-    }
-
-    public static Map<String, PomXmlElement> childrenMap(PomXmlElement xml) {
-        return xml.children
-            .stream()
-            .filter(node -> node.type() == PomXmlNodeType.XmlElement)
-            .map(element -> (PomXmlElement) element)
-            .collect(ImmutableMap.toImmutableMap(PomXmlElement::name, e -> e));
     }
 
     static <T> List<PomSection<T>> extractSections(PomXmlElement elementWithSections, Function<PomXmlElement, T> toKey) {
@@ -50,5 +40,17 @@ public class PomXmlUtils {
             return;
         }
         sections.add(section);
+    }
+
+    static String readChildText(PomXmlElement element, String childName, boolean required) {
+        Optional<String> childText = element.getChildByName(childName)
+                                            .map(PomXmlElement::innerText);
+        if (childText.isPresent()) {
+            return childText.get();
+        }
+        if (required) {
+            throw PomParsingUtils.missingValueException(childName, element);
+        }
+        return null;
     }
 }

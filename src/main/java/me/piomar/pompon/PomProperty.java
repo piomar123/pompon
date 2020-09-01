@@ -7,29 +7,20 @@ import javax.annotation.Nonnull;
 import org.immutables.value.Value;
 
 @Value.Immutable(copy = false)
-public abstract class PomDependency implements Comparable<PomDependency> {
+public abstract class PomProperty implements Comparable<PomProperty> {
 
-    private static final Comparator<PomDependency> COMPARATOR =
-        Comparator.comparing(PomDependency::scope)
-                  .thenComparing(PomDependency::groupId)
-                  .thenComparing(PomDependency::artifactId);
+    private static final Comparator<PomProperty> COMPARATOR =
+        Comparator.comparing(PomProperty::value);
 
-    public abstract String groupId();
-
-    public abstract String artifactId();
-
-    @Value.Default
-    public String scope() {
-        return "compile";
-    }
+    public abstract String value();
 
     @Override
     public String toString() {
-        return String.format("[%s] %s:%s", scope(), groupId(), artifactId());
+        return String.format("<%s>", value());
     }
 
     @Override
-    public int compareTo(@Nonnull PomDependency o) {
+    public int compareTo(@Nonnull PomProperty o) {
         return COMPARATOR.compare(this, o);
     }
 }

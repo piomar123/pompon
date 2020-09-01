@@ -35,8 +35,12 @@ public class CheckOrderMojo extends AbstractMojo {
             }
             throw new MojoFailureException(String.format("POM %s is not ordered:%n%s", pomFile, String.join("\n", disorders)));
 
+        } catch (MojoFailureException e) {
+            throw e;
         } catch (IOException e) {
             throw new MojoExecutionException("Error reading POM file " + pomFile, e);
+        } catch (Exception e) {
+            throw new MojoFailureException("Error parsing POM file " + pomFile, e);
         }
 
     }

@@ -16,11 +16,17 @@ public class PomStructure implements Orderable {
     private final PomDependencies dependencies;
     @Nullable
     private final PomDependencies dependencyManagement;
+    @Nullable
+    private final PomPlugins plugins;
 
-    public PomStructure(@Nullable PomProperties properties, @Nullable PomDependencies dependencies, @Nullable PomDependencies dependencyManagement) {
+    public PomStructure(@Nullable PomProperties properties,
+                        @Nullable PomDependencies dependencies,
+                        @Nullable PomDependencies dependencyManagement,
+                        @Nullable PomPlugins plugins) {
         this.properties = properties;
         this.dependencies = dependencies;
         this.dependencyManagement = dependencyManagement;
+        this.plugins = plugins;
     }
 
     public static PomStructure parse(PomXmlElement root) {
@@ -30,13 +36,17 @@ public class PomStructure implements Orderable {
                                                    .flatMap(dm -> dm.getChildByName("dependencies"))
                                                    .map(PomDependencies::create)
                                                    .orElse(null);
+        PomPlugins plugins = root.getChildByName("build")
+                                 .flatMap(dm -> dm.getChildByName("plugins"))
+                                 .map(PomPlugins::create)
+                                 .orElse(null);
 
-        return new PomStructure(properties, dependencies, dependencyManagement);
+        return new PomStructure(properties, dependencies, dependencyManagement, plugins);
     }
 
     @Override
     public List<String> getOrderViolations() {
-        return Stream.of(properties, dependencies, dependencyManagement)
+        return Stream.of(properties, dependencies, dependencyManagement, plugins)
                      .filter(Objects::nonNull)
                      .map(Orderable::getOrderViolations)
                      .flatMap(Collection::stream)
