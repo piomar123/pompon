@@ -1,5 +1,5 @@
 package me.piomar.pompon;
 
-public class PomEntries {
+public class OrderChecker {
 
 }
