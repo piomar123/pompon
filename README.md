@@ -3,7 +3,9 @@
 
 POM Put in Order Nicely Maven Plugin
 
-A Maven plugin for keeping an order of project POM files
+A Maven plugin for keeping an order of project POM files. 
+Currently, it enforces the alphabetical order of properties, dependencies and plugins. In case of violation, it shows expected order including exact locations. 
+Each section can be divided into sub-sections by adding a comment between entries. This way, it's possible to prioritize selected dependencies/properties when they are more important (changing dependencies order can change resulting versions in Maven dependency race).
 
 ## Usage
 
