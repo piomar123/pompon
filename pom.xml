@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.piomar</groupId>
     <artifactId>pompon-maven-plugin</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>POM Put in Order Nicely Maven Plugin</name>
@@ -31,7 +31,7 @@
         <connection>scm:git:git://github.com/piomar123/pompon.git</connection>
         <developerConnection>scm:git:ssh://github.com/piomar123/pompon.git</developerConnection>
         <url>https://github.com/piomar123/pompon.git</url>
-        <tag>pompon-maven-plugin-0.2.0</tag>
+        <tag>pompon-maven-plugin</tag>
     </scm>
 
     <distributionManagement>
