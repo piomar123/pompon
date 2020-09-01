@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 
 public class OrderChecker {
+
+    private OrderChecker() {
+    }
 
     public static <T extends Comparable<T>> List<String> check(List<PomSection<T>> sections) {
         List<String> violations = new ArrayList<>();
         for (PomSection<T> section : sections) {
             ImmutableSet<Entry<T, PomXmlElement>> actualOrder = section.entries().entrySet();
-            SortedSet<Entry<T, PomXmlElement>> expectedOrder = new TreeSet<>(Entry.comparingByKey());
-            expectedOrder.addAll(actualOrder);
+            List<Entry<T, PomXmlElement>> expectedOrder = Lists.newArrayList(actualOrder);
+            expectedOrder.sort(Entry.comparingByKey());
 
             Iterator<Entry<T, PomXmlElement>> expectedIterator = expectedOrder.iterator();
             Iterator<Entry<T, PomXmlElement>> actualIterator = actualOrder.iterator();
