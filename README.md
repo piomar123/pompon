@@ -1,5 +1,5 @@
 # pompon-maven-plugin
-[![Maven Central](https://img.shields.io/maven-central/v/me.piomar/pompon-maven-plugin.svg?label=Maven%20Central&color=brightgreen)](https://search.maven.org/search?q=g:%22me.piomar%22%20AND%20a:%22pompon-maven-plugin%22)
+[![Maven Central](https://img.shields.io/maven-central/v/me.piomar/pompon-maven-plugin.svg?color=brightgreen)](https://search.maven.org/search?q=g:%22me.piomar%22%20AND%20a:%22pompon-maven-plugin%22)
 
 POM Put in Order Nicely Maven Plugin
 
@@ -12,7 +12,7 @@ Each section can be divided into sub-sections by adding a comment between entrie
 Inline checking with the latest plugin version: `mvn me.piomar:pompon-maven-plugin:check`
 
 Embedding in the project:
-```pom
+```xml
 <plugin>
     <groupId>me.piomar</groupId>
     <artifactId>pompon-maven-plugin</artifactId>
