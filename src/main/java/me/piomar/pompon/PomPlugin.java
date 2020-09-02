@@ -1,6 +1,7 @@
 package me.piomar.pompon;
 
 import java.util.Comparator;
+import java.util.Optional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -14,7 +15,14 @@ public abstract class PomPlugin implements Comparable<PomPlugin> {
         Comparator.comparing(PomPlugin::groupId)
                   .thenComparing(PomPlugin::artifactId);
 
-    public abstract String groupId();
+    @Nullable
+    public abstract String groupIdNullable();
+
+    @Value.Derived
+    public String groupId() {
+        return Optional.ofNullable(groupIdNullable())
+                       .orElse("");
+    }
 
     public abstract String artifactId();
 

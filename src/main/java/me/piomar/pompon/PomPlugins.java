@@ -19,7 +19,7 @@ public class PomPlugins implements Orderable {
 
     static PomPlugin toPlugin(PomXmlElement element) {
         return ImmutablePomPlugin.builder()
-                                 .groupId(PomXmlUtils.readChildText(element, "groupId", true))
+                                 .groupIdNullable(PomXmlUtils.readChildText(element, "groupId", false))
                                  .artifactId(PomXmlUtils.readChildText(element, "artifactId", true))
                                  .version(PomXmlUtils.readChildText(element, "version", false))
                                  .build();
