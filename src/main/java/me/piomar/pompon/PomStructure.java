@@ -18,15 +18,19 @@ public class PomStructure implements Orderable {
     private final PomDependencies dependencyManagement;
     @Nullable
     private final PomPlugins plugins;
+    @Nullable
+    private final PomPlugins pluginManagement;
 
     public PomStructure(@Nullable PomProperties properties,
                         @Nullable PomDependencies dependencies,
                         @Nullable PomDependencies dependencyManagement,
-                        @Nullable PomPlugins plugins) {
+                        @Nullable PomPlugins plugins,
+                        @Nullable PomPlugins pluginManagement) {
         this.properties = properties;
         this.dependencies = dependencies;
         this.dependencyManagement = dependencyManagement;
         this.plugins = plugins;
+        this.pluginManagement = pluginManagement;
     }
 
     public static PomStructure parse(PomXmlElement root) {
@@ -40,13 +44,18 @@ public class PomStructure implements Orderable {
                                  .flatMap(dm -> dm.getChildByName("plugins"))
                                  .map(PomPlugins::create)
                                  .orElse(null);
+        PomPlugins pluginManagement = root.getChildByName("build")
+                                          .flatMap(dm -> dm.getChildByName("pluginManagement"))
+                                          .flatMap(dm -> dm.getChildByName("plugins"))
+                                          .map(PomPlugins::create)
+                                          .orElse(null);
 
-        return new PomStructure(properties, dependencies, dependencyManagement, plugins);
+        return new PomStructure(properties, dependencies, dependencyManagement, plugins, pluginManagement);
     }
 
     @Override
     public List<String> getOrderViolations() {
-        return Stream.of(properties, dependencies, dependencyManagement, plugins)
+        return Stream.of(properties, dependencies, dependencyManagement, plugins, pluginManagement)
                      .filter(Objects::nonNull)
                      .map(Orderable::getOrderViolations)
                      .flatMap(Collection::stream)
