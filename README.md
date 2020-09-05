@@ -1,5 +1,6 @@
 # pompon-maven-plugin
-[![Maven Central](https://img.shields.io/maven-central/v/me.piomar/pompon-maven-plugin.svg?color=brightgreen)](https://search.maven.org/search?q=g:%22me.piomar%22%20AND%20a:%22pompon-maven-plugin%22)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/me.piomar/pompon-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/me.piomar/pompon-maven-plugin/)
+[![Build Status](https://travis-ci.com/piomar123/pompon.svg?branch=master)](https://travis-ci.com/piomar123/pompon)
 
 POM Put in Order Nicely Maven Plugin
 
