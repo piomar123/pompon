@@ -4,5 +4,5 @@ os: linux
 dist: focal
 
 jdk:
-  - openjdk8
+#  - openjdk8
   - openjdk11
